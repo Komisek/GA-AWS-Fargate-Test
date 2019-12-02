@@ -83,7 +83,7 @@ jobs:
   
   test:
     name: test
-    needs: [deploy]
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - name: Configure AWS credentials
@@ -97,7 +97,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
       - name: download image
         id: download-image
-        run: docker pull ${{ steps.build-image.outputs.image }}
+        run: docker pull ${{ jobs.build.build-image.outputs.image }}
         
   deploy:
     name: Deploy
