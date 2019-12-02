@@ -63,6 +63,8 @@ jobs:
         # be deployed to ECS.
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:test .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:test
+    - name: debug
+      run: ls
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
@@ -127,7 +129,7 @@ jobs:
   
   deploy:
     name: Deploy
-    needs: [test, build]
+    needs: [test, test2, build]
     runs-on: ubuntu-latest
 
     steps:
