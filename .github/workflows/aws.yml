@@ -99,7 +99,7 @@ jobs:
       - uses: actions/download-artifact@v1
         with:
           name: imageuri
-      - run: ls -la 
+      - run: ls -la imageuri
       - run: $IMAGEURI=$(cat imageuri)
       - name: pull image
         id: pull-image
