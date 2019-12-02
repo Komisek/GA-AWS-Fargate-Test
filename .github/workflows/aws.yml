@@ -95,7 +95,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
       - uses: actions/download-artifact@v1
         with:
-          name: imageure
+          name: imageuri
       - run: $IMAGEURI=$(cat imageuri)
       - name: pull image
         id: pull-image
