@@ -63,6 +63,13 @@ jobs:
         # be deployed to ECS.
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:test .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:test
+    - name: Fill in the new image ID in the Amazon ECS task definition
+      id: task-def
+      uses: aws-actions/amazon-ecs-render-task-definition@v1
+      with:
+        task-definition: task-def.json
+        container-name: fargate-app
+        image: $ECR_REGISTRY/$ECR_REPOSITORY:test
        
   test:
     name: test
@@ -111,7 +118,7 @@ jobs:
       with:
         task-definition: task-def.json
         container-name: fargate-app
-        image: $$ECR_REGISTRY/$ECR_REPOSITORY:test
+        image: $ECR_REGISTRY/$ECR_REPOSITORY:test
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
