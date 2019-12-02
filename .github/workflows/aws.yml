@@ -97,7 +97,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
       - name: download image
         id: download-image
-        run: docker pull ${{ jobs.build.build-image.outputs.image }}
+        run: echo ${{ steps }}
         
   deploy:
     name: Deploy
