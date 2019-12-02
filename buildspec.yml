@@ -37,3 +37,4 @@ artifacts:
   files: 
     - images.json
     - imageuri
+    - buildspec-test.yml
