@@ -108,7 +108,7 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ga-aws-fargate-test
-        run: docker run -d $IMAGEURI
+        run: docker run -d $ECR_REGISTRY/$ECR_REPOSITORY:$(cat imageuri/imageuri)
 
   test2:
     name: test2
