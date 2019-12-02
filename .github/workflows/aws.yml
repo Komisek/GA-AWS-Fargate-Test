@@ -71,6 +71,9 @@ jobs:
         container-name: fargate-app
         image: $ECR_REGISTRY/$ECR_REPOSITORY:test
     - name: set variable
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: ga-aws-fargate-test
       run: echo "$ECR_REGISTRY/$ECR_REPOSITORY:test" > imageuri
     - uses: actions/upload-artifact@v1
       with:
@@ -96,7 +99,7 @@ jobs:
       - uses: actions/download-artifact@v1
         with:
           name: imageuri
-      - run: cat imageuri
+      - run: cat imageuri/*
       - run: $IMAGEURI=$(cat imageuri)
       - name: pull image
         id: pull-image
