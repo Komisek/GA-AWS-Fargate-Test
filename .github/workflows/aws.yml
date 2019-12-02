@@ -75,7 +75,7 @@ jobs:
     - name: set variable
       run: echo "$ECR_REGISTRY/$ECR_REPOSITORY:test" > imageuri
     - uses: actions/upload-artifact@v1
-       with:
+      with:
         name: imageuri
         path: imageuri      
 
