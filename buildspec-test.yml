@@ -21,9 +21,8 @@ phases:
   build:
     commands:
       - echo get image from repository `date`
-      - ls
-      - cat imageuri
-      - docker run -d $(cat | imageuri)
+      - cat imageuri > $IMAGEURI
+      - docker run -d $IMAGEURI
   post_build:
     commands:
       - echo Build stage successfully completed on `date`
