@@ -74,13 +74,11 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: ga-aws-fargate-test
-      run: echo "$ECR_REGISTRY/$ECR_REPOSITORY:test" > imageuri
+      run: echo "test" > imageuri
     - uses: actions/upload-artifact@v1
       with:
         name: imageuri
         path: imageuri      
-    - name: print variable
-      run: cat imageuri
 
   test:
     name: test
@@ -99,13 +97,12 @@ jobs:
       - uses: actions/download-artifact@v1
         with:
           name: imageuri
-      - run: IMAGEURI=$(cat imageuri/imageuri)
       - name: pull image
         id: pull-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ga-aws-fargate-test
-        run: docker pull $IMAGEURI
+        run: docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$(cat imageuri/imageuri)
       - name: docker run
         id: run-image
         env:
