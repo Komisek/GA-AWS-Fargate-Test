@@ -26,4 +26,4 @@ phases:
   post_build:
     commands:
       - echo Build stage successfully completed on `date`
-      - curl localhost
+      - docker ps
