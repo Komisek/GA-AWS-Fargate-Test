@@ -21,6 +21,8 @@ phases:
   build:
     commands:
       - echo get image from repository `date`
+      - ls
+      - cat imageuri
       - docker run -d $(cat | imageuri)
   post_build:
     commands:
